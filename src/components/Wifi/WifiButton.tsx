@@ -4,6 +4,8 @@ import { WifiHighIcon, WifiLow, WifiZeroIcon } from "lucide-react";
 import useGetWifi from "@/hooks/useGetWifi";
 import { cn } from "@/lib/utils";
 import { modalState, selectedWifiId, selectedWifiName } from "@/store/modal";
+import { invoke } from "@tauri-apps/api/core";
+import { toast } from "sonner";
 
 export default function Wifi() {
   const { data: wifi } = useGetWifi();
@@ -18,12 +20,19 @@ export default function Wifi() {
     ssid: string;
     id: string;
   }) => {
-    //if already in connection list connect
-    // if password changed prompt for password
-    //if not ask for password
-    setModalState(true);
-    setSelectedWifi(ssid);
-    setSelecteWifiId(id);
+    const response = await invoke<{ message: string; success: boolean }>(
+      "check_already_connected_network",
+      {
+        name: ssid,
+      },
+    );
+    if (response.success) return toast.success(response.message);
+
+    if (!response.success) {
+      setModalState(true);
+      setSelectedWifi(ssid);
+      setSelecteWifiId(id);
+    }
   };
 
   return (
