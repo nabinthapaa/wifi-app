@@ -73,7 +73,7 @@ fn greet(name: &str) -> String {
 }
 
 #[tauri::command]
-fn get_available_networks_with_security_type() -> String {
+fn get_available_networks_with_security_type() -> Result<Vec<WifiNetwork>, String> {
     let networks = Command::new("nmcli")
         .args([
             "-f",
@@ -92,7 +92,7 @@ fn get_available_networks_with_security_type() -> String {
         }
         Err(_) => eprintln!("Something went wrong"),
     }
-    serde_json::to_string(&wifi).unwrap()
+    Ok(wifi)
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
