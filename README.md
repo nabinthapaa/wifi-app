@@ -23,3 +23,11 @@ To run in development mode clone repo and run
 ```
 bun install && bun tauri dev
 ```
+
+## Build
+
+To build the project
+
+```
+bun tauri build
+```
