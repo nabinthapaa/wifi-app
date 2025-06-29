@@ -1,13 +1,25 @@
-# Tauri + React + Typescript
+# Wifi App
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
+This a GUI for NetworkManager to manage networks
 
-## Recommended IDE Setup
+## Environment Variables
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+- These are the environment variable set to run application for hyprland and arch
 
-\_\_NV_DISABLE_EXPLICIT_SYNC=1
-GDK_BACKEND=x11
-WEBKIT_DISABLE_DMABUF_RENDERER=1
+  ```
+  __NV_DISABLE_EXPLICIT_SYNC=1
+  GDK_BACKEND=x11
+  WEBKIT_DISABLE_DMABUF_RENDERER=1
+  NM_SECRET_AGENT=no
+  ```
 
-move react.svg to public
+- To get rid of white screen
+  - `move react.svg to public folder`
+
+## Development
+
+To run in development mode clone repo and run
+
+```
+bun install && bun tauri dev
+```
